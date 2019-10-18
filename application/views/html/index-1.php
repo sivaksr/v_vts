@@ -19,7 +19,7 @@ form.example input[type=text] {
   font-size: 17px;
   border: 1px solid grey;
   float: left;
-  width: 480px;
+  width: 450px;
   background: #fff;
   border-radius:15px;
 }
@@ -41,16 +41,18 @@ form.example::after {
 </style>
 </head>
     <div class="container mt-2">
-      <div class="row">
+
         <div class="col-12 hmbnrimg">
 
 
 			
 			 <div class="container">
+			 <div class="centered">
 			 <form  method="post" class="example" action="<?php echo base_url('home'); ?>">
-			  <div class="centered"><input type="text"  name="vehicle_numbers" autocomplete="off"  Placeholder="Enter Vehicle Number"   id="automplete-1" required>
-			  <button class="btn btn-outline-success my-2 my-sm-0" type="submit" >Search</button></div>
+			  <input type="text"  name="vehicle_numbers" autocomplete="off"  Placeholder="Enter Vehicle Number"   id="automplete-1" required>
+			  <button class="btn btn-outline-success my-2 my-sm-0" type="submit" >Search</button>
 			</form>
+			</div>
 		
 			
 			
@@ -122,7 +124,7 @@ form.example::after {
 			
 			  </div>
         </div>
-      </div>
+
     </div>
     <hr>
 	<script>
