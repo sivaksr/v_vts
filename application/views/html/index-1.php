@@ -11,7 +11,7 @@
   position: relative;
   top: 200px;
   left: 45%;
-  width: 49%;
+  width: 52%;
 }
 .mt200{margin-top:450px;}
 form.example input[type=text] {
