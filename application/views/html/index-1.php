@@ -8,19 +8,18 @@
 }
 
 .centered {
-  position: absolute;
-  top: 50%;
-  left: 60%;
-  transform: translate(-40%, -50%);
+  position: relative;
+  top: 200px;
+  left: 45%;
   width: 49%;
 }
-
+.mt200{margin-top:450px;}
 form.example input[type=text] {
   padding: 10px;
   font-size: 17px;
   border: 1px solid grey;
   float: left;
-  width: 450px;
+  width: 480px;
   background: #fff;
   border-radius:15px;
 }
@@ -41,26 +40,24 @@ form.example::after {
 }
 </style>
 </head>
-    <div class="container container1 mt-2">
+    <div class="container mt-2">
       <div class="row">
-        <div class="col-12">
-             <h1 class="text-center">Lorem ipsum dolor sit amet, consectetur.</h1>
-            <img src="<?php echo base_url(); ?>assets/images/banner-img.jpg" alt="" class="img-fluid">
+        <div class="col-12 hmbnrimg">
+
+
 			
-			 <div class="centered">
+			 <div class="container">
 			 <form  method="post" class="example" action="<?php echo base_url('home'); ?>">
-			  <input type="text"  name="vehicle_numbers" autocomplete="off"  Placeholder="Enter Vehicle Number"   id="automplete-1" required>
-			  <button class="btn btn-outline-success my-2 my-sm-0" type="submit" >Search</button>
+			  <div class="centered"><input type="text"  name="vehicle_numbers" autocomplete="off"  Placeholder="Enter Vehicle Number"   id="automplete-1" required>
+			  <button class="btn btn-outline-success my-2 my-sm-0" type="submit" >Search</button></div>
 			</form>
-			<br><br>
+		
 			
 			
-			<div class="clearfix">&nbsp;</div>
-  <div class="container">
+			  <div class="container mt200">
   			 <h4 class="card-title">Found Vehicles List</h4>
 
-		    <div class="clearfix">&nbsp;</div>
-		    <div class="clearfix">&nbsp;</div>
+		    
 			  <!-- Simple Datatable start -->
 			  <?php if(isset($vehicles_list)&& count($vehicles_list)>0){?>
 					<div class="row">

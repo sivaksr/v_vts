@@ -10,8 +10,7 @@
   flex-wrap: nowrap;
   justify-content: flex-start;
 }
-.homebannerimg {background-image:"http://localhost/vts/assets/images/banner-img.jpg";}
-
+.hmbnrimg{background-image: url("../images/banner-img.jpg");  background-repeat:no-repeat;min-height:500px;}
 .seat {
   display: flex;
   flex: 0 0 14.28571428571429%;
