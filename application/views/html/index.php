@@ -46,13 +46,142 @@ form.example::after {
 
 			
 			 <div class="centered">
-			 <form  method="post" class="example" action="<?php echo base_url('home'); ?>">
-			  <input type="text" autocomplete="off"  name="vehicle_numbers"  Placeholder="Enter Vehicle Number"   id="automplete-1" required>
-			  <button class="btn btn-outline-success my-2 my-sm-0" type="submit" name="signup" value="submit">Search</button>
-			</form>
+			 <form  id="suscribe" method="post" class="example" action="<?php echo base_url('home');?>">
+			  <div class="form-group">
+			  <input type="text" autocomplete="off" onchange="get_vehicle_list(this.value);" id="vehicle_numbers"  name="vehicle_numbers"  Placeholder="Enter Vehicle Number or Chasis Number"   id="automplete-1" required>
 			  </div>
+			  <br><br><br>
+			  <button class="btn btn-outline-success my-2 my-sm-0" type="submit" name="signup" value="submit">Search</button>
+			
+			</form>
+			
+			  </div>
+			  <div id="student_data" class="" style="">
+              </div>
+			  
+			  
+			  
+			  
+			  
+			  
+			  
+			  
         </div>
 
+
+
+    
+
+
+
     </div>
-    <hr>
 	
+	
+	
+	
+	
+    <hr>
+	<script>
+    $(document).ready(function() {
+    $('#suscribe').bootstrapValidator({
+		fields: {
+            vehicle_numbers: {
+                 validators: {
+					notEmpty: {
+						message: 'Vehicle Number or Chasis Number is required'
+					}
+				}
+            },
+			
+			
+		
+				
+			}
+        })
+
+    });
+</script>
+<script>
+  
+  function get_type(vehicle_numbers){
+	  	if(vehicle_numbers!=''){
+			jQuery.ajax({
+
+			url: "<?php echo base_url('home/get_vehicle_list');?>",
+			type: 'post',
+			data: {
+			vehicle_numbers: vehicle_numbers,
+			},
+			dataType: 'html',
+			success: function (data) {
+			$("#student_data").empty();
+			$("#student_data").append(data);
+			}
+			
+			});
+
+	}
+	  
+  }
+  $(function () {
+    $("#example1").DataTable();
+    $('#example2').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false
+    });
+  });
+</script>
+<script>
+		$('document').ready(function(){
+			$('.data-table').DataTable({
+				scrollCollapse: true,
+				autoWidth: false,
+				responsive: true,
+				columnDefs: [{
+					targets: "datatable-nosort",
+					orderable: false,
+				}],
+				"lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
+				"language": {
+					"info": "_START_-_END_ of _TOTAL_ entries",
+					searchPlaceholder: "Search"
+				},
+			});
+			$('.data-table-export').DataTable({
+				scrollCollapse: true,
+				autoWidth: false,
+				responsive: true,
+				columnDefs: [{
+					targets: "datatable-nosort",
+					orderable: false,
+				}],
+				"lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
+				"language": {
+					"info": "_START_-_END_ of _TOTAL_ entries",
+					searchPlaceholder: "Search"
+				},
+				dom: 'Bfrtip',
+				buttons: [
+				'copy', 'csv', 'pdf', 'print'
+				]
+			});
+			var table = $('.select-row').DataTable();
+			$('.select-row tbody').on('click', 'tr', function () {
+				if ($(this).hasClass('selected')) {
+					$(this).removeClass('selected');
+				}
+				else {
+					table.$('tr.selected').removeClass('selected');
+					$(this).addClass('selected');
+				}
+			});
+			var multipletable = $('.multiple-select-row').DataTable();
+			$('.multiple-select-row tbody').on('click', 'tr', function () {
+				$(this).toggleClass('selected');
+			});
+		});
+	</script>

@@ -19,25 +19,39 @@ class Home extends CI_Controller
 		if(!$this->session->userdata('vts_details'))
 		{	 
 	     $post=$this->input->post();
-		 if(isset($post['signup'])&& $post['signup']=='submit'){
-        $data['vehicles_list']=$this->Home_model->get_vehicles_list($post['vehicle_numbers']);
-			//echo'<pre>';print_r($data);exit;
-         $this->load->view('html/header'); 
-		 $this->load->view('html/index-1',$data); 
-		  $this->load->view('html/script'); 
+		if(isset($post['signup'])&& $post['signup']=='submit'){
+		$data['vehicles_list']=$this->Home_model->get_vehicles_list($post['vehicle_numbers']);	
+		 $this->load->view('html/header'); 
+		 $this->load->view('html/vehicle_data',$data); 
+		 $this->load->view('html/script'); 
 	     $this->load->view('html/footer'); 
-		 }else{
-		$data['vehicles_list']=array(); 
+		}else{
 	     $this->load->view('html/header'); 
 		 $this->load->view('html/index'); 
 		 $this->load->view('html/script'); 
 	     $this->load->view('html/footer'); 
-		 }
+		}
 	     }else{
 			$this->session->set_flashdata('error',"technical problem occurred. please try again once");
 			redirect('');
 		}
 	}
+	
+	public function serach()
+	{	
+		if(!$this->session->userdata('vts_details'))
+		{	 
+	     $post=$this->input->post();
+		//echo '<pre>';print_r($post);exit;
+		 $data['vehicles_list']=$this->Home_model->get_vehicles_list($post['vehicle_numbers']);
+		//echo '<pre>';print_r($data);exit;
+		 $this->load->view('html/search',$data);
+	     }else{
+			$this->session->set_flashdata('error',"technical problem occurred. please try again once");
+			redirect('');
+		}
+	}
+	
 	/*
 	public function search()
 	{	

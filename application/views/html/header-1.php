@@ -8,7 +8,7 @@
     <!-- Bootstrap -->
     <link href="<?php echo base_url();?>assets/css/bootstrap-4.3.1.css" rel="stylesheet">
 	  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
- <link href="<?php echo base_url(); ?>assets/vendor/css/custom.css" rel="stylesheet">
+ <link href="<?php echo base_url(); ?>assets/css/custom.css" rel="stylesheet">
   
     <link rel="stylesheet" href="<?php echo base_url();?>assets/dist/css/bootstrapValidator.css"/>
     <script src="<?php echo base_url();?>assets/vendors/scripts/script.js"></script>

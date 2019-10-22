@@ -29,6 +29,7 @@ class Vehicles extends Back_end {
 		$admindetails=$this->session->userdata('vts_details');	
 		$post=$this->input->post();	
 		//echo'<pre>';print_r($post);exit;
+		/*
 		$check=$this->Vehicles_model->check_vehicle_chasis_number_exist($post['vehicle_number'],$post['chasis_number'],$post['vehicle_type']);
 		if(count($check)>0){
 		$this->session->set_flashdata('error','Both Vehicle Number and Chasis Number already exists. Please use another Vehicle Number and Chasis Number');
@@ -43,7 +44,8 @@ class Vehicles extends Back_end {
 		if(count($checked)>0){
 		$this->session->set_flashdata('error','Chasis Number already exists. Please use another Chasis Number');
 		redirect('vehicles/add');
-		}		
+		}	
+         */		
 		$add=array(
 		'user_id'=>isset($admindetails['u_id'])?$admindetails['u_id']:'',
 		'vehicle_number'=>isset($post['vehicle_number'])?$post['vehicle_number']:'',
@@ -105,6 +107,7 @@ class Vehicles extends Back_end {
 		{
 		$admindetails=$this->session->userdata('vts_details');	
 		$post=$this->input->post();
+		/*
         $detail=$this->Vehicles_model->get_vehicles_details($post['v_id']);
 		if($detail['vehicle_number']!=$post['vehicle_number'] || $detail['chasis_number']!=$post['chasis_number'] || $detail['vehicle_type']!=$post['vehicle_type']){
 		$check=$this->Vehicles_model->check_vehicle_chasis_number_exist($post['vehicle_number'],$post['chasis_number'],$post['vehicle_type']);
@@ -127,6 +130,7 @@ class Vehicles extends Back_end {
 		redirect('vehicles/edit/'.base64_encode($post['v_id']));
 		}
 	  }
+	  */
 		$update_data=array(
 		'user_id'=>isset($admindetails['u_id'])?$admindetails['u_id']:'',
 		'vehicle_number'=>isset($post['vehicle_number'])?$post['vehicle_number']:'',
