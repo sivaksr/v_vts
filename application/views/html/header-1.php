@@ -46,7 +46,41 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-           <li class="nav-item <?php if($this->uri->segment(2)=='add'){ echo "active";} ?>">
+		<?php if($user_details['role_id']==1){?>
+           <li class="nav-item <?php if($this->uri->segment(2)=='adds'){ echo "active";} ?>">
+            <a class="nav-link" href="<?php echo base_url('employees/adds');?>">Add Employees</a>
+          </li>
+		  <li class="nav-item <?php if($this->uri->segment(2)=='all'){ echo "active";} ?>">
+            <a class="nav-link" href="<?php echo base_url('employees/all');?>">Employees List</a>
+          </li>
+		   
+		  <li class="nav-item <?php if($this->uri->segment(2)=='add'){ echo "active";} ?>">
+            <a class="nav-link" href="<?php echo base_url('regions/add');?>">PS Region</a>
+          </li>
+		  <li class="nav-item <?php if($this->uri->segment(2)=='lists'){ echo "active";} ?>">
+            <a class="nav-link" href="<?php echo base_url('regions/lists');?>">PS Region List</a>
+          </li>
+		  
+		   <li class="nav-item <?php if($this->uri->segment(2)=='alllist'){ echo "active";} ?>">
+            <a class="nav-link" href="<?php echo base_url('vehicles/alllist');?>">Vehicles List</a>
+          </li>
+		   <li class="nav-item <?php if($this->uri->segment(2)=='solvedlist'){ echo "active";} ?>">
+            <a class="nav-link" href="<?php echo base_url('vehicles/solvedlist');?>">Vehicles Solved List</a>
+          </li>
+		<?php }else if($user_details['role_id']==2){?>
+		   <li class="nav-item <?php if($this->uri->segment(2)=='adds'){ echo "active";} ?>">
+            <a class="nav-link" href="<?php echo base_url('employees/adds');?>">Add Employees</a>
+          </li>
+		  <li class="nav-item <?php if($this->uri->segment(2)=='all'){ echo "active";} ?>">
+            <a class="nav-link" href="<?php echo base_url('employees/all');?>">Employees List</a>
+          </li>
+		  
+		   <li class="nav-item <?php if($this->uri->segment(2)=='all'){ echo "active";} ?>">
+            <a class="nav-link" href="<?php echo base_url('vehicles/regionwiselist');?>">Region Wise Vehicles List</a>
+          </li>
+		<?php }else if($user_details['role_id']==3){?>
+		   
+		   <li class="nav-item <?php if($this->uri->segment(2)=='add'){ echo "active";} ?>">
             <a class="nav-link" href="<?php echo base_url('vehicles/add');?>">Add Vehicles</a>
           </li>
 		  <li class="nav-item <?php if($this->uri->segment(2)=='lists'){ echo "active";} ?>">
@@ -61,7 +95,18 @@
 		  <li class="nav-item <?php if($this->uri->segment(1)=='contact'){ echo "active";} ?>">
             <a class="nav-link" href="<?php echo base_url('contact');?>">Contact</a>
           </li>	
+		  <?php }?>
         </ul>
+		<div class="form-inline my-2 my-lg-0">
+		<div class="btn-group show">
+		  <a class="btn btn-outline dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="true">Profile<span class="caret"></span>
+		  </a>
+		  <ul class="dropdown-menu">
+			<a href="#"><li class="btn">Change Password</li></a>
+		  </ul>
+		</div>
+		  
+        </div>
         <div class="form-inline my-2 my-lg-0">
 		<a href="<?php echo base_url('login/logout');?>" class="btn btn-outline-success my-2 my-sm-0" >Logout</a>
 		  

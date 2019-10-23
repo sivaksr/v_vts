@@ -9,13 +9,15 @@ class Vehicles extends Back_end {
 		parent::__construct();	
 		$this->load->library('session');
 		$this->load->model('Vehicles_model');
+		$this->load->model('Employees_model');
 	}
 	public function add()
 	{
 		if($this->session->userdata('vts_details'))
 		{
 			$admindetails=$this->session->userdata('vts_details');
-			  $this->load->view('vehicles/add');
+			$data['regions_list']=$this->Employees_model->get_regions_list();
+			  $this->load->view('vehicles/add',$data);
 			  $this->load->view('html/footer');
 		}else{
 			 $this->session->set_flashdata('error','Please login to continue');
@@ -29,7 +31,7 @@ class Vehicles extends Back_end {
 		$admindetails=$this->session->userdata('vts_details');	
 		$post=$this->input->post();	
 		//echo'<pre>';print_r($post);exit;
-		/*
+		
 		$check=$this->Vehicles_model->check_vehicle_chasis_number_exist($post['vehicle_number'],$post['chasis_number'],$post['vehicle_type']);
 		if(count($check)>0){
 		$this->session->set_flashdata('error','Both Vehicle Number and Chasis Number already exists. Please use another Vehicle Number and Chasis Number');
@@ -45,14 +47,14 @@ class Vehicles extends Back_end {
 		$this->session->set_flashdata('error','Chasis Number already exists. Please use another Chasis Number');
 		redirect('vehicles/add');
 		}	
-         */		
+        
 		$add=array(
 		'user_id'=>isset($admindetails['u_id'])?$admindetails['u_id']:'',
 		'vehicle_number'=>isset($post['vehicle_number'])?$post['vehicle_number']:'',
 		'owner_name'=>isset($post['owner_name'])?$post['owner_name']:'',
 		'chasis_number'=>isset($post['chasis_number'])?$post['chasis_number']:'',
 		'city'=>isset($post['city'])?$post['city']:'',
-		'ps_region'=>isset($post['ps_region'])?$post['ps_region']:'',
+		'ps_region'=>isset($admindetails['region'])?$admindetails['region']:'',
 		'vehicle_type'=>isset($post['vehicle_type'])?$post['vehicle_type']:'',
 		'created_at'=>date('Y-m-d H:i:s'),
 		'updated_at'=>date('Y-m-d H:i:s'),
@@ -77,7 +79,8 @@ class Vehicles extends Back_end {
 		if($this->session->userdata('vts_details'))
 		{
 			$admindetails=$this->session->userdata('vts_details');
-			$data['vehicles_list']=$this->Vehicles_model->get_vehicles_list($admindetails['u_id']);
+			$data['vehicles_list']=$this->Vehicles_model->get_vehicles_list();
+		$data['user_details']=$this->Vehicles_model->get_user_details($admindetails['u_id']);
 			//echo'<pre>';print_r($data);exit;	
 			  $this->load->view('vehicles/list',$data);
 			  $this->load->view('html/footer');
@@ -107,7 +110,7 @@ class Vehicles extends Back_end {
 		{
 		$admindetails=$this->session->userdata('vts_details');	
 		$post=$this->input->post();
-		/*
+		
         $detail=$this->Vehicles_model->get_vehicles_details($post['v_id']);
 		if($detail['vehicle_number']!=$post['vehicle_number'] || $detail['chasis_number']!=$post['chasis_number'] || $detail['vehicle_type']!=$post['vehicle_type']){
 		$check=$this->Vehicles_model->check_vehicle_chasis_number_exist($post['vehicle_number'],$post['chasis_number'],$post['vehicle_type']);
@@ -130,14 +133,14 @@ class Vehicles extends Back_end {
 		redirect('vehicles/edit/'.base64_encode($post['v_id']));
 		}
 	  }
-	  */
+	  
 		$update_data=array(
 		'user_id'=>isset($admindetails['u_id'])?$admindetails['u_id']:'',
 		'vehicle_number'=>isset($post['vehicle_number'])?$post['vehicle_number']:'',
 		'owner_name'=>isset($post['owner_name'])?$post['owner_name']:'',
 		'chasis_number'=>isset($post['chasis_number'])?$post['chasis_number']:'',
 		'city'=>isset($post['city'])?$post['city']:'',
-		'ps_region'=>isset($post['ps_region'])?$post['ps_region']:'',
+		'ps_region'=>isset($admindetails['region'])?$admindetails['region']:'',
 		'vehicle_type'=>isset($post['vehicle_type'])?$post['vehicle_type']:'',
 		'created_at'=>date('Y-m-d H:i:s'),
 		'updated_at'=>date('Y-m-d H:i:s'),
@@ -225,7 +228,7 @@ if($this->session->userdata('vts_details'))
 		if($this->session->userdata('vts_details'))
 		{
 			$admindetails=$this->session->userdata('vts_details');
-			$data['found_vehicles_list']=$this->Vehicles_model->get_found_vehicles_list($admindetails['u_id']);
+			$data['found_vehicles_list']=$this->Vehicles_model->get_found_vehicles_list();
 			  $this->load->view('vehicles/found_vehicles_list',$data);
 			  $this->load->view('html/footer');
 		}else{
@@ -238,7 +241,7 @@ if($this->session->userdata('vts_details'))
 		if($this->session->userdata('vts_details'))
 		{
 			$admindetails=$this->session->userdata('vts_details');
-			$data['lost_vehicles_list']=$this->Vehicles_model->get_lost_vehicles_list($admindetails['u_id']);
+			$data['lost_vehicles_list']=$this->Vehicles_model->get_lost_vehicles_list();
 			  $this->load->view('vehicles/lost_vehicles_list',$data);
 			  $this->load->view('html/footer');
 		}else{
@@ -247,9 +250,82 @@ if($this->session->userdata('vts_details'))
 		}
 	}
 	
+	public function alllist()
+	{
+		if($this->session->userdata('vts_details'))
+		{
+			$admindetails=$this->session->userdata('vts_details');
+			$data['vehicles_list']=$this->Vehicles_model->get_vehicles_list();
+		$data['user_details']=$this->Vehicles_model->get_user_details($admindetails['u_id']);
+			//echo'<pre>';print_r($data);exit;	
+			  $this->load->view('vehicles/vehicles-alllist',$data);
+			  $this->load->view('html/footer');
+		}else{
+			 $this->session->set_flashdata('error','Please login to continue');
+			 redirect('');
+		}
+	}
+	public function sloved()
+		{
+if($this->session->userdata('vts_details'))
+		{	
+         $login_details=$this->session->userdata('vts_details');	
+	             $v_id=base64_decode($this->uri->segment(3));
+					if($status==2){
+					}
+					if($v_id!=''){
+						$stusdetails=array(
+							'status'=>2,
+							'sloved_date'=>date('Y-m-d H:i:s')
+							);
+							$statusdata=$this->Vehicles_model->update_vehicles_details($v_id,$stusdetails);
+							if(count($statusdata)>0){
+								$this->session->set_flashdata('success',"vehicles  successfully  sloved.");
+								redirect('vehicles/solvedlist');
+							}else{
+									$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+									redirect('vehicles/alllist');
+							}
+						}else{
+						$this->session->set_flashdata('error',"technical problem will occurred. Please try again.");
+						redirect('vehicles/alllist');
+					}	
+	
+        }else{
+		 $this->session->set_flashdata('error',"Please login and continue");
+		 redirect('');  
+	   }
+    }
+	public function solvedlist()
+	{
+		if($this->session->userdata('vts_details'))
+		{
+			$admindetails=$this->session->userdata('vts_details');
+			$data['vehicles_list']=$this->Vehicles_model->get_sloved_vehicles_list();
+			//echo'<pre>';print_r($data);exit;	
+			  $this->load->view('vehicles/slove-vehicles-list',$data);
+			  $this->load->view('html/footer');
+		}else{
+			 $this->session->set_flashdata('error','Please login to continue');
+			 redirect('');
+		}
+	}
 	
 	
-	
+	public function regionwiselist()
+	{
+		if($this->session->userdata('vts_details'))
+		{
+			$admindetails=$this->session->userdata('vts_details');
+			$data['vehicles_list']=$this->Vehicles_model->get_regionwise_vehicles_list($admindetails['region']);
+			  				//echo'<pre>';print_r($data);exit;	
+			  $this->load->view('vehicles/regionwise-vehicles-list',$data);
+			  $this->load->view('html/footer');
+		}else{
+			 $this->session->set_flashdata('error','Please login to continue');
+			 redirect('');
+		}
+	}
 	
 	
 	

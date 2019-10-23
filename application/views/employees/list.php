@@ -1,56 +1,44 @@
 
   <div class="clearfix">&nbsp;</div>
   <div class="container">
-			<a href="<?php echo base_url('vehicles/add'); ?>"><button class="btn btn-outline-success my-2 my-sm-0" type="submit" style="float:right">Add Vehicles<i class="fa fa-plus" aria-hidden="true"></i></button></a>
-		     <h4 class="card-title">Vehicles List</h4>
+			<a href="<?php echo base_url('employees/adds'); ?>"><button class="btn btn-outline-success my-2 my-sm-0" type="submit" style="float:right">Add Employees<i class="fa fa-plus" aria-hidden="true"></i></button></a>
+		     <h4 class="card-title">Employees List</h4>
 			<div class="clearfix">&nbsp;</div>
 		    <div class="clearfix">&nbsp;</div>
 			  <!-- Simple Datatable start -->
-			  <?php if(isset($vehicles_list)&& count($vehicles_list)>0){?>
+			  <?php if(isset($employees_list)&& count($employees_list)>0){?>
 					<div class="row">
 						<table class="data-table stripe table-bordered">
 							<thead>
 								<tr>
 									<th class="table-plus datatable-nosort">#</th>
-									<th>Vehicle Number</th>
-									<th>Owner Name</th>
-									<th>Chasis Number</th>
-									<th>City</th>
-									<th>PS Region</th>
-									<th>Vehicle Type</th>
-									<th>Date</th>
+									<th>Role</th>
+									<th>Name</th>
+									<th>Email</th>
+									<th>Mobile Number</th>
+									<th>Working Station Region</th>
+									<th>Working Station Address</th>
 									<th>Status</th>
-									<th>Created By</th>
 									<th class="datatable-nosort">Action</th>
 								</tr>
 							</thead>
 							<tbody>
-							<?php $cnt=1; foreach($vehicles_list as $list){?>
+							<?php $cnt=1; foreach($employees_list as $list){?>
 								<tr>
 									<td class="table-plus"><?php echo $cnt;?></td>
-									<td><?php echo isset($list['vehicle_number'])?$list['vehicle_number']:'' ?></td>
-									<td><?php echo isset($list['owner_name'])?$list['owner_name']:'' ?></td>
-									<td><?php echo isset($list['chasis_number'])?$list['chasis_number']:'' ?></td>
-									<td><?php echo isset($list['city'])?$list['city']:'' ?></td>
+									<td><?php echo isset($list['role'])?$list['role']:'' ?></td>
+									<td><?php echo isset($list['name'])?$list['name']:'' ?></td>
+									<td><?php echo isset($list['email'])?$list['email']:'' ?></td>
+									<td><?php echo isset($list['mobile_number'])?$list['mobile_number']:'' ?></td>
 									<td><?php echo isset($list['region_name'])?$list['region_name']:'' ?></td>
-									<td>
-									<?php if($list['vehicle_type']=='Found Vehicle'){?>
-									<span class="badge badge-success"><?php echo isset($list['vehicle_type'])?$list['vehicle_type']:'' ?></span>
-									<?php }else{ ?>
-								<span class="badge badge-danger"><?php echo isset($list['vehicle_type'])?$list['vehicle_type']:'' ?></span>
-
-									<?php } ?>
-									</td>
-									<td><?php echo isset($list['created_at'])?$list['created_at']:'' ?></td>
+									<td><?php echo isset($list['address'])?$list['address']:'' ?></td>
 									<td><?php if($list['status']==1){ echo "Active";}else{ echo "Deactive"; } ?></td>
-                                     <td><?php echo isset($list['name'])?$list['name']:'' ?></td>
 									 <td>
-									 <?php if($list['user_id']==$user_details['u_id']){?>
 
-									  <a href="<?php echo base_url('vehicles/edit/'.base64_encode($list['v_id'])); ?>" title="Edit"><i class="fa fa-pencil btn btn-sm btn-success"></i></a>
-									  <a href="javascript;void(0);" onclick="admindeactive('<?php echo base64_encode(htmlentities($list['v_id'])).'/'.base64_encode(htmlentities($list['status']));?>');adminstatus('<?php echo $list['status'];?>')" data-toggle="modal" data-target="#myModal" title="Edit"><i class="fa fa-info-circle btn btn-sm btn-warning"></i></a>
-									<a href="javascript;void(0);" onclick="admindedelete('<?php echo base64_encode(htmlentities($list['v_id']));?>');admin('');" data-toggle="modal" data-target="#myModal" title="delete"><i class="fa fa-trash btn btn-sm btn-danger"></i></a>	
-							   <?php }?>
+									  <a href="<?php echo base_url('employees/edit/'.base64_encode($list['u_id'])); ?>" title="Edit"><i class="fa fa-pencil btn btn-sm btn-success"></i></a>
+									  <a href="javascript;void(0);" onclick="admindeactive('<?php echo base64_encode(htmlentities($list['u_id'])).'/'.base64_encode(htmlentities($list['status']));?>');adminstatus('<?php echo $list['status'];?>')" data-toggle="modal" data-target="#myModal" title="Edit"><i class="fa fa-info-circle btn btn-sm btn-warning"></i></a>
+									<a href="javascript;void(0);" onclick="admindedelete('<?php echo base64_encode(htmlentities($list['u_id']));?>');admin('');" data-toggle="modal" data-target="#myModal" title="delete"><i class="fa fa-trash btn btn-sm btn-danger"></i></a>	
+							  
 									</td>
 									
 								</tr>
@@ -107,10 +95,10 @@
 	
 	<script>
 function admindeactive(id){
-	$(".popid").attr("href","<?php echo base_url('vehicles/status'); ?>"+"/"+id);
+	$(".popid").attr("href","<?php echo base_url('employees/status'); ?>"+"/"+id);
 }
 function admindedelete(id){
-	$(".popid").attr("href","<?php echo base_url('vehicles/delete'); ?>"+"/"+id);
+	$(".popid").attr("href","<?php echo base_url('employees/delete'); ?>"+"/"+id);
 	
 }
 function adminstatus(id){

@@ -3,10 +3,24 @@
 <div class="col-md-12 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
-                    <h4 class="card-title">Register</h4>
-                    <form  id="suscribe" class="" method="post" action="<?php echo base_url('register/post');?>"  enctype="multipart/form-data">
+                    <h4 class="card-title">Add Employees</h4>
+                    <form  id="suscribe" class="" method="post" action="<?php echo base_url('employees/post');?>"  enctype="multipart/form-data">
 					<div class="row">
 					<div class="col-md-6">
+                      <div class="form-group">
+                        <label for="exampleInputUsername1">Role</label>
+                        <select type="text" class="form-control" name="role_id" >
+						<option value="">Select</option>
+						<?php if(isset($roles_list) && count($roles_list)>0){?>
+						<?php foreach($roles_list as $list){?>
+                        <option value="<?php echo $list['role_id']; ?>"><?php echo $list['role']; ?></option>
+					   <?php }?>
+					  <?php }?>
+						</select>
+                      </div>
+                      </div>
+					  
+					  <div class="col-md-6">
                       <div class="form-group">
                         <label for="exampleInputUsername1">Name</label>
                         <input type="text" class="form-control" name="name" required placeholder="Enter Name">
@@ -114,6 +128,13 @@
                 validators: {
 					notEmpty: {
 						message: 'Gender is required'
+					}
+				}
+            },
+			role_id: {
+                validators: {
+					notEmpty: {
+						message: 'Role is required'
 					}
 				}
             },

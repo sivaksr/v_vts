@@ -19,7 +19,10 @@ class Back_end extends CI_Controller {
 			if($this->session->userdata('vts_details'))
 			{
 			$userdetails=$this->session->userdata('vts_details');
-			$this->load->view('html/header-1');
+			$data['user_details']=$this->Vehicles_model->get_user_details($userdetails['u_id']);
+					//echo'<pre>';print_r($data);exit;	
+
+			$this->load->view('html/header-1',$data);
 			$this->load->view('html/script');
 			
 			}else{

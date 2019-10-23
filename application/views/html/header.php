@@ -60,7 +60,7 @@
 			  <input class="form-control mr-sm-1" type="email" placeholder="Enter Email" name="email" required>
 			  <input class="form-control mr-sm-1" type="password" placeholder="Enter Password" name="password" required>
 			  <button  type="submit"  class="btn btn-outline-success my-2 my-sm-0">Login</button>
-			  <a href="<?php echo base_url('register');?>"  class="btn btn-outline-success my-2 my-sm-0" type="submit">Register</a>
+			  <!--<a href="<?php echo base_url('register');?>"  class="btn btn-outline-success my-2 my-sm-0" type="submit">Register</a>-->
 		  </form>
         </div>
       </div>

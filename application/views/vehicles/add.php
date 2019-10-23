@@ -33,12 +33,7 @@
                         <input type="text" class="form-control" name="city" required placeholder="Enter City">
                       </div> 
                       </div> 
-					  <div class="col-md-6">
-					  <div class="form-group">
-                        <label for="exampleInputConfirmPassword1">PS Region</label>
-                        <input type="text" class="form-control" name="ps_region" required placeholder="Enter PS Region">
-                      </div>
-                      </div>
+					 
 					  
 					  <div class="col-md-6">
 					  <div class="form-group">

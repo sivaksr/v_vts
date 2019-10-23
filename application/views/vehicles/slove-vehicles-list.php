@@ -6,7 +6,7 @@
 		    <div class="clearfix">&nbsp;</div>
 		    <div class="clearfix">&nbsp;</div>
 			  <!-- Simple Datatable start -->
-			  <?php if(isset($found_vehicles_list)&& count($found_vehicles_list)>0){?>
+			  <?php if(isset($vehicles_list)&& count($vehicles_list)>0){?>
 					<div class="row">
 						<table class="data-table stripe table-bordered">
 							<thead>
@@ -20,22 +20,34 @@
 									<th>Vehicle Type</th>
 									<th>Created By</th>
 									<th>Date</th>
+									<th>Slove Date</th>
+									<th>Status</th>
 								</tr>
 							</thead>
 							<tbody>
-							<?php $cnt=1; foreach($found_vehicles_list as $list){?>
+							<?php $cnt=1; foreach($vehicles_list as $list){?>
 								<tr>
 									<td class="table-plus"><?php echo $cnt;?></td>
 									<td><?php echo isset($list['vehicle_number'])?$list['vehicle_number']:'' ?></td>
 									<td><?php echo isset($list['owner_name'])?$list['owner_name']:'' ?></td>
 									<td><?php echo isset($list['chasis_number'])?$list['chasis_number']:'' ?></td>
 									<td><?php echo isset($list['city'])?$list['city']:'' ?></td>
-									<td><?php echo isset($list['ps_region'])?$list['ps_region']:'' ?></td>
+									<td><?php echo isset($list['region_name'])?$list['region_name']:'' ?></td>
 									<td>
-								<span class="badge badge-success"><?php echo isset($list['vehicle_type'])?$list['vehicle_type']:'' ?></span>
+									<?php if($list['vehicle_type']=='Found Vehicle'){?>
+								    <span class="badge badge-success"><?php echo isset($list['vehicle_type'])?$list['vehicle_type']:'' ?></span>
+									<?php }else if($list['vehicle_type']=='Lost Vehicle'){?>
+									<span class="badge badge-danger"><?php echo isset($list['vehicle_type'])?$list['vehicle_type']:'' ?></span>
+									<?php }?>
 									</td>
 									<td><?php echo isset($list['name'])?$list['name']:'' ?></td>
 									<td><?php echo isset($list['created_at'])?$list['created_at']:'' ?></td>
+									<td><?php echo isset($list['sloved_date'])?$list['sloved_date']:'' ?></td>
+									<td>
+									<?php if($list['status']==2){?>
+                             <span class="badge badge-warning">Sloved</span>									
+							 <?php }?>
+									</td>
 								</tr>
 								
 							<?php $cnt++;}?>

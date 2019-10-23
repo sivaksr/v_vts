@@ -31,12 +31,7 @@
                         <input type="text" class="form-control" name="city" value="<?php echo isset($vehicles_details['city'])?$vehicles_details['city']:'' ?>" required placeholder="Enter City">
                       </div> 
                       </div> 
-					  <div class="col-md-6">
-					  <div class="form-group">
-                        <label for="exampleInputConfirmPassword1">PS Region</label>
-                        <input type="text" class="form-control" name="ps_region" value="<?php echo isset($vehicles_details['ps_region'])?$vehicles_details['ps_region']:'' ?>" required placeholder="Enter PS Region">
-                      </div>
-                      </div>
+					  
 					  
 					  <div class="col-md-6">
 					  <div class="form-group">

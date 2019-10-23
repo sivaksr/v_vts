@@ -9,6 +9,12 @@ class Home_model extends CI_Model
 		parent::__construct();
 		$this->load->database("default");
 	}
+	public function get_user_details($u_id){
+	$this->db->select('users.*')->from('users');		
+	$this->db->where('users.u_id',$u_id);
+	$this->db->where('users.status',1);
+    return $this->db->get()->row_array();
+	}
 	/* register */
 	public function save_register_details($data){
 	$this->db->insert('users',$data);
